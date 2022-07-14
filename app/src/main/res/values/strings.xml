@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TaipeiTravelInfo</string>
+    <string name="err_unknown">Unknown error</string>
 </resources>
