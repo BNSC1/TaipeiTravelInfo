@@ -12,12 +12,16 @@ class AttractionInfoListAdapter(clickListener: OnItemClickListener<Attraction>) 
         clickListener, { binding, item ->
             with(binding) {
                 infoName.text = item.name
-                item.images.firstOrNull()?.src?.let {
-                    Timber.d("loading ${item.name} with image $it")
+
+                item.images.firstOrNull()?.let {
+                    Timber.d("loading ${item.name} with image ${it.src}")
                     Glide.with(root)
-                        .load(it)
+                        .load(it.src)
                         .into(infoImage)
-                } ?: Timber.d("no image for ${item.name}")
+                } ?: let {
+                    Timber.d("no image for ${item.name}")
+                    Glide.with(root).clear(infoImage)
+                }
             }
         }
     )
