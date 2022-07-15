@@ -7,45 +7,28 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
-abstract class ClickableListAdapter<Binding : ViewBinding, Item : Any, ClickListener : OnItemClickListener<Item>>(
-    private val clickListener: ClickListener,
-    private val bindAction: (binding: Binding, item: Item, clickListener: ClickListener) -> Unit,
+abstract class ClickableListAdapter<Binding : ViewBinding, Item : Any>(
+    private val clickListener: OnItemClickListener<Item>,
+    private val bindAction: (binding: Binding, item: Item) -> Unit,
 ) :
-    RecyclerView.Adapter<ClickableViewHolder<Binding, Item, ClickListener>>() {
-    private var items = mutableListOf<Item>()
+    RecyclerView.Adapter<BaseViewHolder<Binding, Item>>() {
+
+    private val items = mutableListOf<Item>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): ClickableViewHolder<Binding, Item, ClickListener> {
-        return ClickableViewHolder(
-            initViewBinding(parent), clickListener, bindAction
+    ): BaseViewHolder<Binding, Item> {
+        return BaseViewHolder(
+            initViewBinding(parent), bindAction
         )
     }
 
-    override fun onBindViewHolder(
-        holder: ClickableViewHolder<Binding, Item, ClickListener>,
-        position: Int
-    ) {
+    override fun onBindViewHolder(holder: BaseViewHolder<Binding, Item>, position: Int) {
         holder.bind(items[position])
     }
 
-    override fun getItemCount(): Int = items.size
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun replaceItems(items: List<Item>) {
-        this.items.apply {
-            clear()
-            addAll(items)
-        }
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addItems(items: List<Item>) {
-        this.items.addAll(items.size, items)
-        notifyDataSetChanged()
-    }
+    override fun getItemCount() = items.size
 
     @Suppress("UNCHECKED_CAST")
     private fun initViewBinding(parent: ViewGroup): Binding {
@@ -58,5 +41,30 @@ abstract class ClickableListAdapter<Binding : ViewBinding, Item : Any, ClickList
             Boolean::class.java
         )
         return method.invoke(null, LayoutInflater.from(parent.context), parent, false) as Binding
+    }
+
+    fun addItems(items: List<Item>) {
+        this.items.let {
+            val oldSize = it.size
+            it.addAll(oldSize, items)
+            notifyItemRangeInserted(oldSize, items.size)
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun replaceItems(items: List<Item>) {
+        this.items.let {
+            it.clear()
+            it.addAll(items)
+            notifyDataSetChanged()
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun removeItems() {
+        this.items.let {
+            it.clear()
+            notifyDataSetChanged()
+        }
     }
 }
