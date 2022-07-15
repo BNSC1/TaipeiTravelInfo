@@ -2,14 +2,9 @@ package com.bn.taipeitravelinfo.data.model
 
 data class Attraction(
     val name: String,
-    val images: ImageSource
+    val images: List<ImageSource>
 ) {
-    data class ImageSource(
-        private val src: String,
-        private val ext: String,
-    ) {
-        val url get() = src + ext
-    }
+    data class ImageSource(val src: String)
 }
 
 /*
