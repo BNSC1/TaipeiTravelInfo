@@ -2,6 +2,7 @@ package com.bn.taipeitravelinfo.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.bn.taipeitravelinfo.arch.ObserveStateFragment
 import com.bn.taipeitravelinfo.arch.OnItemClickListener
@@ -10,12 +11,10 @@ import com.bn.taipeitravelinfo.databinding.FragmentAttractionInfoListBinding
 import com.bn.taipeitravelinfo.ui.adapter.AttractionInfoListAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AttractionInfoListFragment : ObserveStateFragment<FragmentAttractionInfoListBinding>() {
-    @Inject
-    override lateinit var viewModel: AttractionInfoViewModel
+    override val viewModel: AttractionInfoViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
