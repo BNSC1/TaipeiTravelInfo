@@ -30,6 +30,11 @@ class AttractionInfoListFragment : ObserveStateFragment<FragmentAttractionInfoLi
                 }
             }
             attractionList.adapter = setupAttractionInfoListAdapter()
+            attractionList.addItemDecoration(
+                MarginItemDecoration(
+                    resources.getDimension(R.dimen.item_recyclerview_padding).toInt()
+                )
+            )
         }
 
         observeAttractions()
