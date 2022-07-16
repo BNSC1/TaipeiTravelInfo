@@ -1,19 +1,16 @@
 package com.bn.taipeitravelinfo.arch
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.viewbinding.ViewBinding
 import java.lang.reflect.ParameterizedType
 
-abstract class ClickableListAdapter<Binding : ViewBinding, Item : Any>(
-    private val clickListener: OnItemClickListener<Item>,
+abstract class CustomPagingDataAdapter<Binding : ViewBinding, Item : Any>(
     private val bindAction: (binding: Binding, item: Item) -> Unit,
-) :
-    RecyclerView.Adapter<BaseViewHolder<Binding, Item>>() {
-
-    private val items = mutableListOf<Item>()
+    comparator: DiffUtil.ItemCallback<Item>
+) : PagingDataAdapter<Item,BaseViewHolder<Binding, Item>>(comparator) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,10 +22,8 @@ abstract class ClickableListAdapter<Binding : ViewBinding, Item : Any>(
     }
 
     override fun onBindViewHolder(holder: BaseViewHolder<Binding, Item>, position: Int) {
-        holder.bind(items[position])
+        getItem(position)?.let { holder.bind(it) }
     }
-
-    override fun getItemCount() = items.size
 
     @Suppress("UNCHECKED_CAST")
     private fun initViewBinding(parent: ViewGroup): Binding {
@@ -41,30 +36,5 @@ abstract class ClickableListAdapter<Binding : ViewBinding, Item : Any>(
             Boolean::class.java
         )
         return method.invoke(null, LayoutInflater.from(parent.context), parent, false) as Binding
-    }
-
-    fun addItems(items: List<Item>) {
-        this.items.let {
-            val oldSize = it.size
-            it.addAll(oldSize, items)
-            notifyItemRangeInserted(oldSize, items.size)
-        }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun replaceItems(items: List<Item>) {
-        this.items.let {
-            it.clear()
-            it.addAll(items)
-            notifyDataSetChanged()
-        }
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun removeItems() {
-        this.items.let {
-            it.clear()
-            notifyDataSetChanged()
-        }
     }
 }

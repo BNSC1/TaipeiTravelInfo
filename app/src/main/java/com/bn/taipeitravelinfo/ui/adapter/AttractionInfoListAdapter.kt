@@ -1,15 +1,16 @@
 package com.bn.taipeitravelinfo.ui.adapter
 
-import com.bn.taipeitravelinfo.arch.ClickableListAdapter
+import androidx.recyclerview.widget.DiffUtil
+import com.bn.taipeitravelinfo.arch.CustomPagingDataAdapter
 import com.bn.taipeitravelinfo.arch.OnItemClickListener
 import com.bn.taipeitravelinfo.data.model.Attraction
 import com.bn.taipeitravelinfo.databinding.ItemAttractionInfoListBinding
 import com.bumptech.glide.Glide
 import timber.log.Timber
 
-class AttractionInfoListAdapter(clickListener: OnItemClickListener<Attraction>) :
-    ClickableListAdapter<ItemAttractionInfoListBinding, Attraction>(
-        clickListener, { binding, item ->
+class AttractionInfoListAdapter(private val clickListener: OnItemClickListener<Attraction>) :
+    CustomPagingDataAdapter<ItemAttractionInfoListBinding, Attraction>(
+        { binding, item ->
             with(binding) {
                 infoName.text = item.name
 
@@ -22,6 +23,13 @@ class AttractionInfoListAdapter(clickListener: OnItemClickListener<Attraction>) 
                     Timber.d("no image for ${item.name}")
                     Glide.with(root).clear(infoImage)
                 }
+                root.setOnClickListener { clickListener.onItemClick(item) }
             }
-        }
-    )
+        }, object : DiffUtil.ItemCallback<Attraction>() {
+            override fun areItemsTheSame(oldItem: Attraction, newItem: Attraction) =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: Attraction, newItem: Attraction) =
+                oldItem == newItem
+
+        })

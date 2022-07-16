@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.bn.taipeitravelinfo.R
 import com.bn.taipeitravelinfo.arch.ObserveStateFragment
 import com.bn.taipeitravelinfo.arch.OnItemClickListener
 import com.bn.taipeitravelinfo.data.model.Attraction
 import com.bn.taipeitravelinfo.databinding.FragmentAttractionInfoListBinding
 import com.bn.taipeitravelinfo.ui.adapter.AttractionInfoListAdapter
+import com.bn.taipeitravelinfo.util.MarginItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -20,11 +22,17 @@ class AttractionInfoListFragment : ObserveStateFragment<FragmentAttractionInfoLi
         super.onViewCreated(view, savedInstanceState)
 
         with(binding) {
+            attractionList.apply {
+                postponeEnterTransition()
+                viewTreeObserver.addOnPreDrawListener {
+                    startPostponedEnterTransition()
+                    true
+                }
+            }
             attractionList.adapter = setupAttractionInfoListAdapter()
         }
-        viewLifecycleOwner.lifecycleScope.launch {
-            observeAttractions()
-        }
+
+        observeAttractions()
     }
 
     private fun setupAttractionInfoListAdapter() =
@@ -34,12 +42,10 @@ class AttractionInfoListFragment : ObserveStateFragment<FragmentAttractionInfoLi
             }
         })
 
-    private suspend fun observeAttractions() =
-        viewModel.getAttractions().observe(viewLifecycleOwner) { res ->
-            handleState(res) {
-                res.data?.let {
-                    (binding.attractionList.adapter as AttractionInfoListAdapter).addItems(it)
-                }
+    private fun observeAttractions() =
+        viewModel.attractionsLiveData.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                (binding.attractionList.adapter as AttractionInfoListAdapter).submitData(it)
             }
         }
 }
