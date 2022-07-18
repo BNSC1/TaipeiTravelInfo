@@ -9,5 +9,18 @@
         android:id="@+id/attractionInfoListFragment"
         android:name="com.bn.taipeitravelinfo.ui.AttractionInfoListFragment"
         android:label="fragment_attraction_info_list"
-        tools:layout="@layout/fragment_attraction_info_list" />
+        tools:layout="@layout/fragment_attraction_info_list" >
+        <action
+            android:id="@+id/action_to_attractionDetailFragment"
+            app:destination="@id/attractionDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/attractionDetailFragment"
+        android:name="com.bn.taipeitravelinfo.ui.AttractionDetailFragment"
+        android:label="fragment_attraction_detail"
+        tools:layout="@layout/fragment_attraction_detail" >
+        <argument
+            android:name="attraction"
+            app:argType="com.bn.taipeitravelinfo.data.model.Attraction"/>
+    </fragment>
 </navigation>

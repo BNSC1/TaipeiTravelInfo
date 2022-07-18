@@ -51,7 +51,7 @@ class AttractionInfoListFragment : ObserveStateFragment<FragmentAttractionInfoLi
     private fun setupAttractionInfoListAdapter() =
         AttractionInfoListAdapter(object : OnItemClickListener<Attraction> {
             override fun onItemClick(item: Attraction) {
-
+                AttractionInfoListFragmentDirections.actionToAttractionDetailFragment(item).navigate()
             }
         })
 
