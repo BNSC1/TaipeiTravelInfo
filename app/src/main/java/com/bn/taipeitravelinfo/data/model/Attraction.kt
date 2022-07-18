@@ -1,11 +1,31 @@
 package com.bn.taipeitravelinfo.data.model
 
+import android.os.Parcelable
+import com.squareup.moshi.Json
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class Attraction(
     val id: Int,
     val name: String,
-    val images: List<ImageSource>
-) {
+    val address: String,
+    val tel: String,
+    val url: String,
+    val ticket: String,
+    @Json(name = "official_site") val officialSite: String,
+    val remind: String,
+    val images: List<ImageSource>,
+): Parcelable {
+    val localTel = tel.let {
+        if (it.startsWith(TAIWAN_CALLING_CODE)) {
+            it.replace("-", "").replace(TAIWAN_CALLING_CODE, "0")
+        } else it
+    }
+
     data class ImageSource(val src: String)
+    companion object {
+        private const val TAIWAN_CALLING_CODE = "+886"
+    }
 }
 
 /*
