@@ -9,6 +9,7 @@ data class Attraction(
     val id: Int,
     val name: String,
     val address: String,
+    val introduction: String,
     val tel: String,
     val url: String,
     val ticket: String,
