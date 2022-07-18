@@ -83,4 +83,7 @@ dependencies {
     //paging 3
     def paging_version = '3.2.0-alpha01'
     implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+
+    def swipe_refresh_layout_version = '1.2.0-alpha01'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout_version"
 }
