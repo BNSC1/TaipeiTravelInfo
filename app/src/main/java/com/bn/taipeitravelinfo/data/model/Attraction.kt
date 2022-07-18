@@ -22,7 +22,8 @@ data class Attraction(
         } else it
     }
 
-    data class ImageSource(val src: String)
+    @Parcelize
+    data class ImageSource(val src: String): Parcelable
     companion object {
         private const val TAIWAN_CALLING_CODE = "+886"
     }
