@@ -17,4 +17,9 @@
     <style name="title_text">
         <item name="android:textSize">@dimen/text_title_size</item>
     </style>
+
+    <style name="rounded_corner_image_pager_style">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
 </resources>
