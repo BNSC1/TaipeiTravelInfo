@@ -4,7 +4,11 @@
     <string name="err_no_connection">No connection</string>
     <string name="err_connection_timeout">Connection timeout</string>
     <string name="action_retry">Retry</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tel_number">聯絡電話</string>
+    <string name="ticket_note">購票規則</string>
+    <string name="remind">注意事項</string>
+    <string name="related_link">相關連結</string>
+    <string name="taipei_travel_site">台北旅遊網</string>
+    <string name="introduction">景點介紹</string>
 
 </resources>

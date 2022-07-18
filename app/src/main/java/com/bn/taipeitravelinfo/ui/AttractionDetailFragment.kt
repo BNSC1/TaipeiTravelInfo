@@ -8,8 +8,8 @@ import com.bn.taipeitravelinfo.arch.BaseFragment
 import com.bn.taipeitravelinfo.arch.OnItemClickListener
 import com.bn.taipeitravelinfo.data.model.Attraction
 import com.bn.taipeitravelinfo.databinding.FragmentAttractionDetailBinding
+import com.bn.taipeitravelinfo.ktx.setVisible
 import com.bn.taipeitravelinfo.ui.adapter.ImagePagerAdapter
-import com.bn.taipeitravelinfo.util.CenterLinearLayoutManager
 
 class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding>() {
     private val args: AttractionDetailFragmentArgs by navArgs()
@@ -20,20 +20,54 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding>()
 
         selectedAttraction = args.attraction
         with(binding) {
-            imagePagerList.apply {
-                adapter = ImagePagerAdapter(object : OnItemClickListener<Attraction.ImageSource> {
-                    override fun onItemClick(item: Attraction.ImageSource) {
-                        //todo: view original image
-                    }
-                }).apply {
-                    addItems(selectedAttraction.images)
-                }
-                layoutManager = CenterLinearLayoutManager(
-                    requireActivity(),
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-            }
+            setupImagePagerList()
+            setupAttractionInfo()
         }
     }
+
+    private fun FragmentAttractionDetailBinding.setupAttractionInfo() =
+        selectedAttraction.apply {
+            nameText.text = name
+            addressText.text = address
+            telText.text = localTel
+            introductionText.text = introduction
+            ticket.let {
+                if (it.isNotEmpty()) {
+                    ticketRuleText.text = ticket
+                    showTicketRuleLabel()
+                }
+            }
+            remind.let {
+                if (it.isNotEmpty()) {
+                    remindText.text = remind
+                    showRemindLabel()
+                }
+            }
+            taipeiTravelLinkBtn.setOnClickListener {
+                //todo: open browser to link
+            }
+        }
+
+    private fun FragmentAttractionDetailBinding.showTicketRuleLabel() =
+        ticketRuleLabelText.setVisible()
+
+    private fun FragmentAttractionDetailBinding.showRemindLabel() = remindLabelText.setVisible()
+
+
+    private fun FragmentAttractionDetailBinding.setupImagePagerList() =
+        imagePagerList.apply {
+            adapter = ImagePagerAdapter(object : OnItemClickListener<Attraction.ImageSource> {
+                override fun onItemClick(item: Attraction.ImageSource) {
+                    //todo: view original image
+                }
+            }).apply {
+                addItems(selectedAttraction.images)
+            }
+            layoutManager = LinearLayoutManager(
+                requireActivity(),
+                LinearLayoutManager.HORIZONTAL,
+                false
+            )
+        }
+
 }
