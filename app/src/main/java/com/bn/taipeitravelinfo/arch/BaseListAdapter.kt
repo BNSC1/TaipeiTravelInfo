@@ -25,11 +25,11 @@ abstract class BaseListAdapter<Binding : ViewBinding, Item : Any> :
 
     override fun getItemCount() = items.size
 
-    private fun addItems(i: List<Item>) = items.addAll(i)
+    fun addItems(i: List<Item>) = items.addAll(i)
 
-    private fun clearItems() = let { if (items.isNotEmpty()) items.clear() }
+    fun clearItems() = let { if (items.isNotEmpty()) items.clear() }
 
-    private fun replaceItems(i: List<Item>) {
+    fun replaceItems(i: List<Item>) {
         clearItems()
         addItems(i)
     }
