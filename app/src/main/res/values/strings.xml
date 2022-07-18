@@ -3,5 +3,6 @@
     <string name="err_unknown">Unknown error</string>
     <string name="err_no_connection">No connection</string>
     <string name="err_connection_timeout">Connection timeout</string>
+    <string name="action_retry">Retry</string>
 
 </resources>

@@ -13,6 +13,7 @@ import com.bn.taipeitravelinfo.databinding.FragmentAttractionInfoListBinding
 import com.bn.taipeitravelinfo.ktx.collectLatestLifecycleFlow
 import com.bn.taipeitravelinfo.ui.adapter.AttractionInfoListAdapter
 import com.bn.taipeitravelinfo.util.MarginItemDecoration
+import com.bn.taipeitravelinfo.util.PagingLoadStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -31,7 +32,10 @@ class AttractionInfoListFragment : ObserveStateFragment<FragmentAttractionInfoLi
                     startPostponedEnterTransition()
                     true
                 }
-                adapter = listAdapter
+                adapter = listAdapter.withLoadStateHeaderAndFooter(
+                    PagingLoadStateAdapter(listAdapter),
+                    PagingLoadStateAdapter(listAdapter)
+                ) //todo: not showing header
                 addItemDecoration(
                     MarginItemDecoration(
                         resources.getDimension(R.dimen.item_recyclerview_padding).toInt()
