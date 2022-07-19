@@ -133,17 +133,26 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/related_link"
                 app:layout_constraintStart_toStartOf="@+id/name_text"
-                app:layout_constraintTop_toBottomOf="@+id/remind_label_text" />
+                app:layout_constraintTop_toBottomOf="@+id/remind_text" />
 
-            <Button
-                android:id="@+id/taipei_travel_link_btn"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/link_button_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/taipei_travel_site"
-                app:layout_constraintBottom_toBottomOf="@+id/related_link_label_text"
+                android:layout_marginTop="-16dp"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:layout_constraintStart_toEndOf="@+id/related_link_label_text"
-                app:layout_constraintTop_toTopOf="@+id/related_link_label_text" />
+                app:layout_constraintTop_toTopOf="@+id/related_link_label_text"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_attraction_detail_link" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="tel_label_text,introduction_label_text,ticket_rule_label_text,remind_label_text,related_link_label_text" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
