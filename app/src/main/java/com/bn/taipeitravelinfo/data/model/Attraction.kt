@@ -14,6 +14,7 @@ data class Attraction(
     val url: String,
     val ticket: String,
     @Json(name = "official_site") val officialSite: String,
+    val facebook: String,
     val remind: String,
     val images: List<ImageSource>,
 ): Parcelable {
