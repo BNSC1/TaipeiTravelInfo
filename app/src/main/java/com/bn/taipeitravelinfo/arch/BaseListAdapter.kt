@@ -25,13 +25,24 @@ abstract class BaseListAdapter<Binding : ViewBinding, Item : Any> :
 
     override fun getItemCount() = items.size
 
-    fun addItems(i: List<Item>) = items.addAll(i)
+    fun addItems(i: List<Item>) = items.apply {
+        val oldSize = items.size
+        addAll(i)
+        notifyItemRangeChanged(oldSize, i.size)
+    }
 
-    fun clearItems() = let { if (items.isNotEmpty()) items.clear() }
+    fun clearItems() = items.apply {
+        if (isNotEmpty()) {
+            clear()
+            notifyDataSetChanged()
+        }
+    }
 
-    fun replaceItems(i: List<Item>) {
-        clearItems()
-        addItems(i)
+    fun replaceItems(i: List<Item>) = items.apply {
+        if (isNotEmpty()) {
+            clear()
+            addItems(i)
+        }
     }
 
 
