@@ -82,7 +82,7 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding>()
         imagePagerList.apply {
             adapter = ImagePagerAdapter(object : OnItemClickListener<Attraction.ImageSource> {
                 override fun onItemClick(item: Attraction.ImageSource) {
-                    //todo: view original image
+                    openLinkInBrowser(item.src) //todo: in-app viewer
                 }
             }).apply {
                 addItems(selectedAttraction.images)
