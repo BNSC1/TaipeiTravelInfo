@@ -25,13 +25,23 @@
     <TextView
         android:id="@+id/info_name"
         style="@style/title_text"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/barrier"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="觀海橋" />
+
+    <TextView
+        android:id="@+id/info_address"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/info_name"
+        app:layout_constraintTop_toBottomOf="@+id/info_name"
+        tools:text="觀海橋40號" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"

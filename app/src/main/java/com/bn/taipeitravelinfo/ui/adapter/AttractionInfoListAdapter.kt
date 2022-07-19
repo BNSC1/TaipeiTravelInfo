@@ -13,6 +13,7 @@ class AttractionInfoListAdapter(private val clickListener: OnItemClickListener<A
         { binding, item ->
             with(binding) {
                 infoName.text = item.name
+                infoAddress.text = item.address
 
                 item.images.firstOrNull()?.let {
                     Timber.d("loading ${item.name} with image ${it.src}")
