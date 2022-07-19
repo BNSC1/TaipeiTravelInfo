@@ -1,14 +1,16 @@
 <resources>
-    <string name="app_name">TaipeiTravelInfo</string>
+    <string name="app_name" translatable="false">TaipeiTravelInfo</string>
     <string name="err_unknown">Unknown error</string>
     <string name="err_no_connection">No connection</string>
     <string name="err_connection_timeout">Connection timeout</string>
     <string name="action_retry">Retry</string>
-    <string name="tel_number">聯絡電話</string>
-    <string name="ticket_note">購票規則</string>
-    <string name="remind">注意事項</string>
-    <string name="related_link">相關連結</string>
-    <string name="taipei_travel_site">台北旅遊網</string>
-    <string name="introduction">景點介紹</string>
+    <string name="tel_number">Tel Number</string>
+    <string name="ticket_note">Ticket Note</string>
+    <string name="remind">Reminder</string>
+    <string name="related_link">Related Link</string>
+    <string name="taipei_travel_site">Taipei Travel Site</string>
+    <string name="official_site">Official Site</string>
+    <string name="facebook_page">Facebook Page</string>
+    <string name="introduction">Introduction</string>
 
 </resources>

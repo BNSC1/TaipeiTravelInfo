@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="err_unknown">未知的錯誤</string>
+    <string name="err_no_connection">無網路連線</string>
+    <string name="err_connection_timeout">連線逾時</string>
+    <string name="action_retry">重試</string>
+    <string name="tel_number">聯絡電話</string>
+    <string name="ticket_note">購票規則</string>
+    <string name="remind">注意事項</string>
+    <string name="related_link">相關連結</string>
+    <string name="taipei_travel_site">台北旅遊網</string>
+    <string name="official_site">官方網站</string>
+    <string name="facebook_page">Facebook專頁</string>
+    <string name="introduction">景點介紹</string>
+</resources>
