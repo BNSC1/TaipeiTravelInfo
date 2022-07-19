@@ -1,5 +1,7 @@
 package com.bn.taipeitravelinfo.ui
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.navArgs
@@ -10,6 +12,7 @@ import com.bn.taipeitravelinfo.data.model.Attraction
 import com.bn.taipeitravelinfo.databinding.FragmentAttractionDetailBinding
 import com.bn.taipeitravelinfo.ktx.setVisible
 import com.bn.taipeitravelinfo.ui.adapter.ImagePagerAdapter
+
 
 class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding>() {
     private val args: AttractionDetailFragmentArgs by navArgs()
@@ -44,7 +47,7 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding>()
                 }
             }
             taipeiTravelLinkBtn.setOnClickListener {
-                //todo: open browser to link
+                openLinkInBrowser(selectedAttraction.url)
             }
         }
 
@@ -69,5 +72,8 @@ class AttractionDetailFragment : BaseFragment<FragmentAttractionDetailBinding>()
                 false
             )
         }
+
+    private fun openLinkInBrowser(uri: String) =
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(uri)))
 
 }
