@@ -14,6 +14,6 @@ class AttractionTest {
     }
 
     private fun mockAttraction(tel: String) = Attraction(
-        0, "", "", tel, "", "", "", "", listOf()
+        0, "", "", tel, "", "", "", "","","", listOf()
     )
 }

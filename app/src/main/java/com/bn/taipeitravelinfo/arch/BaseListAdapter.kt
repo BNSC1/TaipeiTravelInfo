@@ -41,8 +41,8 @@ abstract class BaseListAdapter<Binding : ViewBinding, Item : Any> :
     fun replaceItems(i: List<Item>) = items.apply {
         if (isNotEmpty()) {
             clear()
-            addItems(i)
         }
+            addItems(i)
     }
 
 
