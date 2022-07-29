@@ -9,7 +9,7 @@ import java.lang.reflect.ParameterizedType
 abstract class BaseListAdapter<Binding : ViewBinding, Item : Any> :
     RecyclerView.Adapter<BaseViewHolder<Binding, Item>>() {
     private val items = mutableListOf<Item>()
-    abstract val bindAction: (binding: Binding, item: Item) -> Unit
+    protected abstract val bindAction: (binding: Binding, item: Item) -> Unit
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
