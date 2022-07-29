@@ -8,7 +8,6 @@ data class DetailLink(val title: String, val url: String)
 
 class AttractionDetailLinkListAdapter(private val clickListener: OnItemClickListener<DetailLink>) :
     BaseListAdapter<ItemAttractionDetailLinkBinding, DetailLink>() {
-    override val items = mutableListOf<DetailLink>()
     override val bindAction = { binding: ItemAttractionDetailLinkBinding, item: DetailLink ->
         with(binding.linkBtn) {
             text = item.title

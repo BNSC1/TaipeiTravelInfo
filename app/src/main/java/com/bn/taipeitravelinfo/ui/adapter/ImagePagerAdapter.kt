@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 
 class ImagePagerAdapter(private val onItemClickListener: OnItemClickListener<Attraction.ImageSource>) :
     BaseListAdapter<ItemPagerImageBinding, Attraction.ImageSource>() {
-    override val items = mutableListOf<Attraction.ImageSource>()
     override val bindAction = { binding: ItemPagerImageBinding, item: Attraction.ImageSource ->
         with(binding) {
             Glide.with(root).load(item.src).into(image)
