@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.bn.taipeitravelinfo.R
@@ -29,9 +28,10 @@ abstract class ObserveStateFragment<Binding : ViewBinding> : BaseFragment<Bindin
     }
 
     private fun collectErrorMessage() {
-        viewModel.errorMsg.collectLifecycleFlow(this, Lifecycle.State.CREATED) {
+        viewModel.errorMsg.collectLifecycleFlow(viewLifecycleOwner) {
             if (it.isNotBlank()) {
                 showToast(message = it, Toast.LENGTH_LONG)
+                Timber.e(it)
                 viewModel.errorMsg.emit("")
             }
         }
